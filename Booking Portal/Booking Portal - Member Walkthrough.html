@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Booking Portal · Member Walkthrough — House of Champions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; height: 100%; background: #15120D; overflow: hidden; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="wf-kit.jsx"></script>
+<script type="text/babel" src="screens-join.jsx"></script>
+<script type="text/babel" src="screens-home.jsx"></script>
+<script type="text/babel" src="screens-manage.jsx"></script>
+<script type="text/babel" src="screens-mobile.jsx"></script>
+<script type="text/babel" src="slides-deck.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const W = 1240;
+
+const slides = [
+  // Join · acquisition
+  { section: "Join · acquisition", title: "Tier selection",      label: "1 · Tier selection",          w: W,    h: 760, first: true, render: () => <ScreenTiers /> },
+  { section: "Join · acquisition", title: "Sign-up · account",   label: "2 · Sign-up · Account",       w: 1120, h: 680, render: () => <ScreenSignup1 /> },
+  { section: "Join · acquisition", title: "Sign-up · profile",   label: "2 · Sign-up · Profile",       w: 1120, h: 680, render: () => <ScreenSignup2 /> },
+  { section: "Join · acquisition", title: "Sign-up · tier",      label: "2 · Sign-up · Tier",          w: 1120, h: 680, render: () => <ScreenSignup3 /> },
+  { section: "Join · acquisition", title: "Billing hand-off",    label: "2 · Sign-up · Billing",       w: 1120, h: 700, render: () => <ScreenSignup4 /> },
+  { section: "Join · acquisition", title: "Log in",              label: "3 · Log in",                  w: 1120, h: 620, render: () => <ScreenLogin /> },
+  { section: "Join · acquisition", title: "Forgot password",     label: "3 · Forgot password",         w: 1120, h: 620, render: () => <ScreenForgot /> },
+
+  // Member home
+  { section: "Member home",        title: "Dashboard",           label: "4 · Dashboard",               w: W,    h: 880, first: true, render: () => <ScreenDashboard /> },
+  { section: "Member home",        title: "Dashboard · empty",   label: "4 · Dashboard · empty state", w: W,    h: 720, render: () => <ScreenDashboardEmpty /> },
+
+  // Desk booking
+  { section: "Desk booking",       title: "Browse desks",        label: "5 · Browse desks (list)",     w: W,    h: 760, first: true, render: () => <ScreenDeskList /> },
+  { section: "Desk booking",       title: "Review & confirm",    label: "6 · Review & confirm",        w: W,    h: 760, render: () => <ScreenDeskConfirm /> },
+  { section: "Desk booking",       title: "Confirmation",        label: "6 · Confirmation",            w: W,    h: 760, render: () => <ScreenDeskDone /> },
+
+  // Meeting rooms
+  { section: "Meeting rooms",      title: "Reserve a room",      label: "7 · Reserve a room",          w: W,    h: 820, first: true, render: () => <ScreenRooms /> },
+  { section: "Meeting rooms",      title: "Confirmation",        label: "7 · Confirmation",            w: W,    h: 700, render: () => <ScreenRoomsDone /> },
+
+  // My bookings
+  { section: "My bookings",        title: "Upcoming & past",     label: "8 · Upcoming & past",         w: W,    h: 880, first: true, render: () => <ScreenBookings /> },
+  { section: "My bookings",        title: "Amend booking",       label: "8 · Amend booking",           w: W,    h: 720, render: () => <ScreenAmend /> },
+  { section: "My bookings",        title: "Cancel · confirm",    label: "8 · Cancel · confirm",        w: W,    h: 880, render: () => <ScreenCancel /> },
+  { section: "My bookings",        title: "Cancelled",           label: "8 · Cancelled · success",     w: W,    h: 680, render: () => <ScreenCancelled /> },
+
+  // Account & plan
+  { section: "Account & plan",     title: "Account area",        label: "9 · Account area",            w: W,    h: 800, first: true, render: () => <ScreenAccount /> },
+  { section: "Account & plan",     title: "Plan management",     label: "10 · Plan management",        w: W,    h: 820, render: () => <ScreenPlan /> },
+  { section: "Account & plan",     title: "Change summary",      label: "10 · Change summary",         w: W,    h: 820, render: () => <ScreenPlanChange /> },
+  { section: "Account & plan",     title: "Billing & invoices",  label: "12 · Billing & invoices",     w: W,    h: 720, render: () => <ScreenBilling /> },
+
+  // Team & seats
+  { section: "Team & seats",       title: "Seat roster",         label: "11 · Seat roster & billing",  w: W,    h: 820, first: true, render: () => <ScreenTeam /> },
+  { section: "Team & seats",       title: "Invite a seat",       label: "11 · Invite a seat",          w: W,    h: 820, render: () => <ScreenInvite /> },
+
+  // Mobile
+  { section: "Responsive · mobile",title: "Dashboard",           label: "M · Dashboard",               w: 372,  h: 760, first: true, render: () => <MobileDashboard /> },
+  { section: "Responsive · mobile",title: "Desk browse",         label: "M · Desk browse",             w: 372,  h: 760, render: () => <MobileDesks /> },
+  { section: "Responsive · mobile",title: "My bookings",         label: "M · My bookings",             w: 372,  h: 760, render: () => <MobileBookings /> },
+  { section: "Responsive · mobile",title: "Log in",              label: "M · Log in",                  w: 372,  h: 760, render: () => <MobileLogin /> },
+];
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <SlideDeck deckTitle="Booking Portal" deckKind="Member Walkthrough" slides={slides} storageKey="hoc-member-deck" />
+);
+</script>
+</body>
+</html>
